@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@prisma/*": ["./prisma/*"],
+      "@generated/*": ["./src/generated/*"]
     }
   },
   "include": [
