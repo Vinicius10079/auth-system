@@ -47,7 +47,7 @@ export default async function VerifyEmailPage({
 
         <Link
           href="/login"
-          className="inline-block w-full py-3 rounded-lg bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition"
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"
         >
           Ir para Login
         </Link>

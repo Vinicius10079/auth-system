@@ -69,7 +69,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
             name="password"
             placeholder="Nova senha"
             required
-            className="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-500"
           />
 
           <input
@@ -77,7 +77,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
             name="confirm"
             placeholder="Confirmar senha"
             required
-            className="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-500"
           />
 
           <button
