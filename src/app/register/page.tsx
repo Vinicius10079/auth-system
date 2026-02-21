@@ -2,12 +2,51 @@ import { registerUser } from "./actions"
 
 export default function RegisterPage() {
   return (
-    <form action={registerUser} className="flex flex-col gap-4 max-w-md">
-      <input name="name" placeholder="Nome" />
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Senha" required />
-      <input name="confirmPassword" type="password" placeholder="Confirmar Senha" required />
-      <button type="submit">Cadastrar</button>
-    </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl">
+        <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">
+          Criar conta
+        </h1>
+
+        <form
+          action={registerUser}
+          className="flex flex-col gap-4"
+        >
+          <input
+            name="name"
+            placeholder="Nome"
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"
+          />
+
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"          />
+
+          <input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"          />
+
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirmar Senha"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"          />
+
+          <button
+            type="submit"
+            className="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition"
+          >
+            Cadastrar
+          </button>
+        </form>
+      </div>
+    </div>
   )
 }

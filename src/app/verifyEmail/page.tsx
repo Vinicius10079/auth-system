@@ -35,21 +35,19 @@ export default async function VerifyEmailPage({
   })
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Email confirmado com sucesso 🎉</h1>
-      <p>Agora você já pode fazer login.</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl text-center">
+        <h1 className="text-2xl font-semibold text-gray-900 mb-4">
+          Email confirmado com sucesso
+        </h1>
 
-      <div style={{ marginTop: "20px" }}>
+        <p className="text-sm text-gray-600 mb-8">
+          Agora você já pode fazer login na sua conta.
+        </p>
+
         <Link
           href="/login"
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#000",
-            color: "#fff",
-            textDecoration: "none",
-            borderRadius: "6px",
-            display: "inline-block",
-          }}
+          className="inline-block w-full py-3 rounded-lg bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition"
         >
           Ir para Login
         </Link>

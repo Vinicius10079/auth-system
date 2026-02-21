@@ -23,26 +23,31 @@ export default function SessionPage() {
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Área de Sessão</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-600 p-6">
+      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
+        <h1 className="text-2xl font-semibold text-gray-900 mb-6">
+          Área de Sessão
+        </h1>
 
-      <p><strong>Nome:</strong> {session.user?.name}</p>
-      <p><strong>Email:</strong> {session.user?.email}</p>
+        <div className="space-y-3 text-gray-700">
+          <p>
+            <span className="font-semibold text-gray-900">Nome:</span>{" "}
+            {session.user?.name}
+          </p>
 
-      <button
-        onClick={() => signOut({ callbackUrl: "/login" })}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#dc2626",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer"
-        }}
-      >
-        Logout
-      </button>
+          <p>
+            <span className="font-semibold text-gray-900">Email:</span>{" "}
+            {session.user?.email}
+          </p>
+        </div>
+
+        <button
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="mt-8 px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   )
 }

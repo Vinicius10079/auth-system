@@ -43,3 +43,8 @@ Clone o projeto:
 ```bash
 git clone <repo-url>
 cd auth-system
+```
+
+## OBSERVAÇÕES
+
+- Funcionalidade de envio de E-mails não implementada. Links que seriam enviados por E-mail são exibidos no console. 

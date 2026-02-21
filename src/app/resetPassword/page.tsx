@@ -57,32 +57,37 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
   }
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Redefinir senha</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl">
+        <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">
+          Redefinir senha
+        </h1>
 
-      <form action={updatePassword}>
-        <div>
+        <form action={updatePassword} className="flex flex-col gap-4">
           <input
             type="password"
             name="password"
             placeholder="Nova senha"
             required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
-        </div>
 
-        <div style={{ marginTop: "10px" }}>
           <input
             type="password"
             name="confirm"
             placeholder="Confirmar senha"
             required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
-        </div>
 
-        <div style={{ marginTop: "20px" }}>
-          <button type="submit">Alterar senha</button>
-        </div>
-      </form>
+          <button
+            type="submit"
+            className="w-full py-3 mt-2 rounded-lg bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition"
+          >
+            Alterar senha
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

@@ -20,21 +20,38 @@ export default function RecoverEmailPage() {
   }
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Recuperar senha</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl">
+        
+        <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">
+          Recuperar senha
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Digite seu email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit">Enviar</button>
-      </form>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-500"
+          />
 
-      {message && <p style={{ marginTop: "20px" }}>{message}</p>}
+          <button
+            type="submit"
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition"
+          >
+            Enviar instruções
+          </button>
+        </form>
+
+        {message && (
+          <p className="mt-5 text-sm text-center text-green-600">
+            {message}
+          </p>
+        )}
+        
+      </div>
     </div>
-  )
+  );
 }

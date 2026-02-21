@@ -35,58 +35,31 @@ export default function LoginPage() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          padding: "32px",
-          border: "1px solid #ddd",
-          borderRadius: "8px",
-        }}
-      >
-        <h1 style={{ marginBottom: "24px", textAlign: "center" }}>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl">
+        <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">
           Login
         </h1>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "16px" }}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{
-                width: "100%",
-                padding: "8px",
-              }}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"          />
 
-          <div style={{ marginBottom: "16px" }}>
-            <input
-              type="password"
-              placeholder="Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{
-                width: "100%",
-                padding: "8px",
-              }}
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"          />
 
           {error && (
-            <p style={{ color: "red", marginBottom: "16px" }}>
+            <p className="text-sm text-red-600">
               {error}
             </p>
           )}
@@ -94,28 +67,19 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            style={{
-              width: "100%",
-              padding: "10px",
-              cursor: "pointer",
-            }}
+            className={`w-full py-3 rounded-lg text-white font-semibold text-sm transition ${
+              loading
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
             {loading ? "Entrando..." : "Entrar"}
           </button>
 
-          <div
-            style={{
-              marginTop: "12px",
-              textAlign: "right",
-            }}
-          >
+          <div className="text-center mt-2">
             <Link
               href="/recoverEmail"
-              style={{
-                fontSize: "14px",
-                color: "#2563eb",
-                textDecoration: "none",
-              }}
+              className="text-sm text-blue-600 hover:underline"
             >
               Esqueci minha senha
             </Link>
@@ -123,5 +87,5 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
-  )
+  );
 }

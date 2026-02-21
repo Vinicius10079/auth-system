@@ -1,12 +1,32 @@
 import Link from "next/link"
 
 export default function PasswordResetedPage() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>Senha alterada com sucesso 🎉</h1>
-      <Link href="/login">
-        <button>Ir para Login</button>
-      </Link>
+
+return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl text-center">
+        
+        {/* Ícone de sucesso */}
+        <div className="w-18 h-18 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6 text-3xl">
+          
+        </div>
+
+        <h1 className="text-2xl font-semibold text-gray-900 mb-3">
+          Senha alterada com sucesso!!!
+        </h1>
+
+        <p className="text-sm text-gray-500 mb-7">
+          Sua senha foi atualizada. Agora você já pode acessar sua conta normalmente.
+        </p>
+
+        <Link href="/login" className="block w-full">
+          <button
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition"
+          >
+            Ir para Login
+          </button>
+        </Link>
+      </div>
     </div>
-  )
+  );
 }
