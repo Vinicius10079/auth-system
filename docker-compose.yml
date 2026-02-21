@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: auth_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: authdb
+      MYSQL_USER: authuser
+      MYSQL_PASSWORD: authpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: auth_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: mysql://authuser:authpass@db:3306/authdb
+      NEXTAUTH_SECRET: supersecretkey
+      NEXTAUTH_URL: http://localhost:3000
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
