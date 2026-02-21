@@ -29,9 +29,10 @@ Sistema completo de autenticação construído com:
 
 - Next.js 15
 - NextAuth
-- Prisma 6
-- MySQL Server 8
 - bcrypt
+- MySQL Server 8
+- Prisma 6
+- Dokcer
 
 ---
 
