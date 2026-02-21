@@ -1,6 +1,3 @@
-// app/verify/page.tsx
-// http://localhost:3000/verifyEmail?token=376fd85a-4ff8-4191-be57-7a0a62092f60
-
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 
@@ -58,7 +55,7 @@ export default async function VerifyEmailPage({
         </Link>
       </div>
     </div>
-)
+  )
 
 }
 

@@ -1,22 +1,48 @@
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { redirect } from "next/navigation"
+"use client"
 
-export default async function SessionPage() {
-  const session = await getServerSession(authOptions)
+import { useSession, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+
+export default function SessionPage() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login")
+    }
+  }, [status, router])
+
+  if (status === "loading") {
+    return <p>Carregando...</p>
+  }
 
   if (!session) {
-    redirect("/login")
+    return null
   }
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Área Logada</h1>
+    <div style={{ padding: "2rem" }}>
+      <h1>Área de Sessão</h1>
 
-      <div style={{ marginTop: "20px" }}>
-        <h2>{session.user?.name}</h2>
-        <p>{session.user?.email}</p>
-      </div>
+      <p><strong>Nome:</strong> {session.user?.name}</p>
+      <p><strong>Email:</strong> {session.user?.email}</p>
+
+      <button
+        onClick={() => signOut({ callbackUrl: "/login" })}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          backgroundColor: "#dc2626",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer"
+        }}
+      >
+        Logout
+      </button>
     </div>
   )
 }

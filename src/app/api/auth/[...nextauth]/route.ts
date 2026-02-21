@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma"
 import bcrypt from "bcrypt"
 import type { AuthOptions } from "next-auth"
 
-
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -13,6 +12,7 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null
@@ -22,21 +22,58 @@ export const authOptions: AuthOptions = {
           where: { email: credentials.email },
         })
 
+        // Nunca revelar se o usuário existe
         if (!user || !user.passwordHash) {
           return null
         }
 
-        const isValid = await bcrypt.compare(
+        // Verifica bloqueio
+        if (user.lockUntil && user.lockUntil > new Date()) {
+          throw new Error(
+            "Conta temporariamente bloqueada. Tente novamente mais tarde."
+          )
+        }
+
+        const isValidPassword = await bcrypt.compare(
           credentials.password,
           user.passwordHash
         )
 
-        if (!isValid) {
+        // Senha inválida
+        if (!isValidPassword) {
+          const attempts = user.failedLoginAttempts + 1
+
+          if (attempts >= 5) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: {
+                failedLoginAttempts: 0,
+                lockUntil: new Date(Date.now() + 15 * 60 * 1000), // 15 min
+              },
+            })
+          } else {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: {
+                failedLoginAttempts: attempts,
+              },
+            })
+          }
+
           return null
         }
 
+        // Login válido → resetar contador
+        await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            failedLoginAttempts: 0,
+            lockUntil: null,
+          },
+        })
+
         if (!user.emailVerified) {
-            throw new Error("Email não verificado")
+          throw new Error("Email não verificado")
         }
 
         return {
@@ -47,9 +84,16 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60, // 1 hora
   },
+
+  jwt: {
+    maxAge: 60 * 60, // 1 hora
+  },
+
   pages: {
     signIn: "/login",
   },
