@@ -1,14 +1,17 @@
-"use client"
+"use client" // Isso necessário para usar hooks como useState.
 
-import { useState } from "react"
+import { useState } from "react" // Importa o hook useState do React para gerenciar o estado do email e da mensagem.
 
+// Componente funcional para a página de recuperação de email.
 export default function RecoverEmailPage() {
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
 
+  // Função assíncrona para lidar com o envio do formulário.
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
+    // Envia uma requisição POST para a API de recuperação de senha com o email fornecido.
     const res = await fetch("/api/forgotPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -19,6 +22,7 @@ export default function RecoverEmailPage() {
     setMessage(data.message)
   }
 
+  // Retorna o JSX para renderizar a página de recuperação de email.
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
       <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl">

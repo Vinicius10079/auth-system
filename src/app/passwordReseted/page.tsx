@@ -1,7 +1,9 @@
-import Link from "next/link"
+import Link from "next/link" // Importa o componente Link do Next.js para criar links de navegação entre as páginas.
 
+// Componente de página de senha resetada
 export default function PasswordResetedPage() {
 
+// Renderiza uma mensagem de sucesso informando que a senha foi alterada com sucesso, junto com um botão que redireciona o usuário para a página de login. A interface é estilizada usando classes do Tailwind CSS para criar um design moderno e responsivo.
 return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
       <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl text-center">

@@ -1,39 +1,47 @@
-import { prisma } from "@/lib/prisma"
-import Link from "next/link"
+import { prisma } from "@/lib/prisma" // Importa o cliente Prisma para acessar o banco de dados.
+import Link from "next/link" // Importa o componente Link do Next.js para navegação.
 
+// Página para verificar o email do usuário.
 interface VerifyEmailPageProps {
   searchParams: Promise<{
     token?: string
   }>
 }
 
+// Página para verificar o email do usuário.
 export default async function VerifyEmailPage({
   searchParams,
 }: VerifyEmailPageProps) {
   const params = await searchParams
   const token = params.token
 
+  // Verifica se o token existe.
   if (!token) {
     return <div>Token inválido.</div>
   }
 
+  // Busca o token de verificação no banco de dados.
   const verification = await prisma.verificationToken.findUnique({
     where: { token },
   })
 
+  // Verifica se o token é válido e não expirou.
   if (!verification) {
     return <div>Token inválido ou expirado.</div>
   }
 
+  // Atualiza o usuário para marcar o email como verificado.
   await prisma.user.update({
     where: { id: verification.userId },
     data: { emailVerified: true },
   })
 
+  // Remove o token de verificação do banco de dados.
   await prisma.verificationToken.delete({
     where: { token },
   })
 
+  // Redireciona para uma página de sucesso ou exibe uma mensagem.
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
       <div className="w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl text-center">

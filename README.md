@@ -14,14 +14,14 @@ Sistema completo de autenticação construído com:
 
 ## Funcionalidades
 
-- ✅ Registro de usuário
-- ✅ Verificação de email via token
-- ✅ Login com email e senha
-- ✅ Sessão via JWT
-- ✅ Proteção de rotas com middleware
-- ✅ Recuperação de senha
-- ✅ Reset de senha com token expirável
-- ✅ Exclusão automática de tokens usados
+- Registro de usuário
+- Verificação de email via token
+- Login com email e senha
+- Sessão via JWT
+- Proteção de rotas com middleware
+- Recuperação de senha
+- Reset de senha com token expirável
+- Exclusão automática de tokens usados
 
 ---
 
@@ -44,7 +44,42 @@ Clone o projeto:
 git clone <repo-url>
 cd auth-system
 ```
+Certifique-se de ter Docker e Docker Compose instalados.
+
+```bash
+docker compose up --build
+```
+
+Ou em versão antiga:
+
+```bash
+docker-compose up --build
+```
+
+Execute as migrações do Prisma.
+
+```bash
+docker compose exec app npx prisma migrate deploy
+```
+
+Se tiver em ambiente de desenvolvimento:
+
+```bash
+docker compose exec app npx prisma migrate dev
+```
+
+A Aplicação estará disponível em:
+
+http://localhost:3000
 
 ## OBSERVAÇÕES
 
-- Funcionalidade de envio de E-mails não implementada. Links que seriam enviados por E-mail são exibidos no console. 
+- Para parar os containers:
+
+```bash
+docker compose down
+```
+
+- Funcionalidades de envio e verificação de existência de endereço de e-mail não estão implementadas.
+- Endereços fictícios podem ser utilizados para cadastro.
+- Os links que normalmente seriam enviados por e-mail são exibidos no console da aplicação.

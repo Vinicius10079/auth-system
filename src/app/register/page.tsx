@@ -1,5 +1,6 @@
-import { registerUser } from "./actions"
+import { registerUser } from "./actions" // Importe a função de registro do arquivo de ações.
 
+// Página de registro de usuário.
 export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
