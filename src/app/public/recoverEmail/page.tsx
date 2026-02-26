@@ -1,6 +1,7 @@
 "use client" // Isso necessário para usar hooks como useState.
 
 import { useState } from "react" // Importa o hook useState do React para gerenciar o estado do email e da mensagem.
+import Link from "next/link" // Importa o componente Link do Next.js para navegação entre páginas.
 
 // Componente funcional para a página de recuperação de email.
 export default function RecoverEmailPage() {
@@ -55,6 +56,14 @@ export default function RecoverEmailPage() {
           </p>
         )}
         
+        <div className="text-center mt-2 flex flex-col gap-5">
+            <Link
+              href="/public/login"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Voltar ao login
+            </Link>
+        </div>
       </div>
     </div>
   );

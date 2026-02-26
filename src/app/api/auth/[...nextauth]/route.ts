@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcrypt"
 import type { AuthOptions } from "next-auth"
+import crypto from "crypto"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -72,26 +73,68 @@ export const authOptions: AuthOptions = {
           },
         })
 
+        // Se email não for verificado, gera token e retorna flag especial
         if (!user.emailVerified) {
-          throw new Error("Email não verificado")
+          const verificationToken = crypto.randomUUID()
+
+          await prisma.verificationToken.create({
+            data: {
+              token: verificationToken,
+              userId: user.id,
+            },
+          })
+
+          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+
+          console.log(
+            `Link de verificação: ${baseUrl}/public/verifyEmail?token=${verificationToken}`
+          )
+
+          // Retorna usuário com flag de email não verificado
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            emailNotVerified: true,
+          }
         }
 
+        // Email verificado - retorno normal
         return {
           id: user.id,
           name: user.name,
           email: user.email,
+          emailNotVerified: false,
         }
       },
     }),
   ],
 
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.emailNotVerified = user.emailNotVerified
+      }
+      return token
+    },
+    
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string
+        session.user.emailNotVerified = token.emailNotVerified as boolean
+      }
+      return session
+    },
+  },
+
   session: {
     strategy: "jwt",
-    maxAge: 60 * 60, // 1 hora
+    maxAge: 60 * 60,
   },
 
   jwt: {
-    maxAge: 60 * 60, // 1 hora
+    maxAge: 60 * 60,
   },
 
   pages: {

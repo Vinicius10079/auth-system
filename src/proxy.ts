@@ -2,10 +2,10 @@ import { withAuth } from "next-auth/middleware"
 
 export default withAuth({
   pages: {
-    signIn: "/login",
+    signIn: "/public/login",
   },
 })
 
 export const config = {
-  matcher: ["/session/:path*"],
+  matcher: ["/protected/:path*"],
 }

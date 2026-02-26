@@ -1,19 +1,24 @@
 "use server"
 
+import { redirect } from "next/navigation"
 import { registerUserService } from "@/modules/auth/services/auth.service"
 
-export async function registerUser(formData: FormData) {
+export async function registerUser(prevState: { error: string } | null, formData: FormData) {
   const name = formData.get("name") as string
   const email = formData.get("email") as string
   const password = formData.get("password") as string
   const confirmPassword = formData.get("confirmPassword") as string
 
   if (!name || !email || !password) {
-    throw new Error("Campos obrigatórios")
+    return {
+      error: "Campos obrigatórios"
+    }
   }
 
   if (password !== confirmPassword) {
-    throw new Error("As senhas não coincidem")
+    return {
+      error: "As senhas não coincidem"
+    }
   }
 
   const result = await registerUserService({
@@ -25,13 +30,21 @@ export async function registerUser(formData: FormData) {
   // Narrowing correto
   if (!result.success) {
     if (result.error === "EMAIL_ALREADY_EXISTS") {
-      throw new Error("Email já cadastrado")
+      return {
+        error: "Email já cadastrado"
+      }
     }
 
-    throw new Error("Erro ao registrar usuário")
+    return {
+      error: "Erro ao registrar usuário"
+    }
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+
   console.log(
-    `Link de verificação: http://localhost:3000/authentication/verifyEmail?token=${result.data.verificationToken}`
+    `Link de verificação: ${baseUrl}/public/verifyEmail?token=${result.data.verificationToken}`
   )
+
+  redirect("/public/verifyEmailSend")
 }
