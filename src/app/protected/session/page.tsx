@@ -12,7 +12,7 @@ export default function SessionPage() {
   // Verifica o status da sessão e redireciona para a página de login se o usuário não estiver autenticado.
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/login")
+      router.push("/public/login")
     }
   }, [status, router])
 
@@ -47,7 +47,7 @@ export default function SessionPage() {
         </div>
 
         <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: "/public/login" })}
           className="mt-8 px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition"
         >
           Logout

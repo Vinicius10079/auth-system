@@ -64,7 +64,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
       where: { token },
     })
 
-    redirect("/passwordReseted")
+    redirect("/public/passwordReseted")
   }
 
   // Renderiza o formulário de redefinição de senha.

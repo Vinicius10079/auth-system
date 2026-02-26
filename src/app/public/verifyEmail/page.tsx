@@ -54,7 +54,7 @@ export default async function VerifyEmailPage({
         </p>
 
         <Link
-          href="/login"
+          href="/public/login"
             className="w-full p-3 rounded-lg border border-gray-300 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-gray-400"
         >
           Ir para Login

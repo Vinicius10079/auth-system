@@ -35,7 +35,7 @@ export default function LoginPage() {
       return
     }
 
-    router.push("/session")
+    router.push("/protected/session")
   }
   
   // Renderiza o formulário de login com campos para email e senha, um botão de envio e um link para recuperação de senha. O formulário é estilizado usando classes do Tailwind CSS para criar uma interface moderna e responsiva.
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
           <div className="text-center mt-2">
             <Link
-              href="/recoverEmail"
+              href="/public/recoverEmail"
               className="text-sm text-blue-600 hover:underline"
             >
               Esqueci minha senha

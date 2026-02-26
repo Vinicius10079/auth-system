@@ -21,7 +21,7 @@ return (
           Sua senha foi atualizada. Agora você já pode acessar sua conta normalmente.
         </p>
 
-        <Link href="/login" className="block w-full">
+        <Link href="/public/login" className="block w-full">
           <button
             className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition"
           >

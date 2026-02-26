@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     })
 
     console.log(
-      `Link de reset: http://localhost:3000/resetPassword?token=${token}`
+      `Link de reset: http://localhost:3000/public/resetPassword?token=${token}`
     )
 
     return NextResponse.json({
